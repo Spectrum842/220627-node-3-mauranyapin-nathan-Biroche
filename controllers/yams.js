@@ -5,7 +5,7 @@ dotenv.config()
 const { APP_SECRET: secret } = process.env
 
 export const YamsControllerGet = (req, res) => {
-
+    console.log('USER ID : '+req.session._id)
     let diceTab = []
     let patrieWin = []
     let occurenceTab = []
@@ -25,20 +25,25 @@ export const YamsControllerGet = (req, res) => {
                     occurenceTab.push(diceTab.filter(element => element==i).length)
                 }
                 console.log(occurenceTab)
+
                 if(occurenceTab.filter(element => element == 2).length>1){
                     console.log('Double paire !')
-                    
-                    console.log(patrieTab[(Math.floor(Math.random()*8 ))])
                     patrieWin.push(patrieTab[(Math.floor(Math.random()*8 ))])
-                    
                     
                 }else if(occurenceTab.filter(element => element == 4) != ''){
                     console.log('Carré ! ')
-                        patrieWin.push(patrieTab[(Math.floor(Math.random()*8 ))])
-                        patrieWin.push(patrieTab[(Math.floor(Math.random()*8 ))])
+                    patrieWin.push(patrieTab[(Math.floor(Math.random()*8 ))])
+                    patrieWin.push(patrieTab[(Math.floor(Math.random()*8 ))])
+
+                }else if (  occurenceTab.filter(element => element == 5).length !=  '' ){
+                    console.log('yams')
+                    patrieWin.push(patrieTab[(Math.floor(Math.random()*8 ))])
+                    patrieWin.push(patrieTab[(Math.floor(Math.random()*8 ))])
+                    patrieWin.push(patrieTab[(Math.floor(Math.random()*8 ))])
                 }else{
                     console.log("Perdu l'ami")
                 }
+            
             }
             
             res.render('../views/game/yams', {diceTab, patrieWin}) 
