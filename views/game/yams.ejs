@@ -5,7 +5,7 @@
         <p>
             <a  href="/yams?play=true" id="gameButton" class="gameButton"  >Lancer les dés</button>
         </p>
-        <% if(diceTab){ %>
+        <% if(diceTab ){ %>
             <h2>Votre score :</h2>
             <ul>
             <%
@@ -15,5 +15,16 @@
             </ul>
             <%
 
+            if(patrieWin != '' ){ %>
+                %>
+                <h2>Vous avez gagné !</h2>
+                <ul>
+                <%
+                patrieWin.forEach((element) => { %> <li> <%= element.name %> </li> <% }
+                ) 
+                %>
+                </ul>
+                <%
+            }
         } %>
         <%- include('../partials/footer.ejs') -%>
