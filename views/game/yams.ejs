@@ -5,7 +5,15 @@
         <p>
             <a  href="/yams?play=true" id="gameButton" class="gameButton"  >Lancer les dés</button>
         </p>
-        <% if(diceTab){
-            diceTab.forEach((element) => { %> <p> <%= element %> </p> <% } ) 
+        <% if(diceTab){ %>
+            <h2>Votre score :</h2>
+            <ul>
+            <%
+            diceTab.forEach((element) => { %> <li> <%= element %> </li> <% }
+             ) 
+             %>
+            </ul>
+            <%
+
         } %>
         <%- include('../partials/footer.ejs') -%>

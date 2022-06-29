@@ -7,18 +7,38 @@ const { APP_SECRET: secret } = process.env
 export const YamsControllerGet = (req, res) => {
 
     let diceTab = []
+    let patrieTab = []
+    let patrieWin = []
+    let occurenceTab = []
     console.log(req.query)
-    if(req.query.play == "true"){
-        console.log('coucou')
+    PatrieModel.find()
+        .then((patrieTab) =>{
+            console.log(patrieTab[0]._id);
+            if(req.query.play == "true"){
+                console.log('coucou')
+                
+                for(let i = 0 ; i < 5; i++){
         
-        for(let i = 0 ; i < 5; i++){
-
-            diceTab[i]= (Math.floor(Math.random()*10 + 1))
-        }
-        console.log(diceTab)
-    }
-    res.render('../views/game/yams', {diceTab})
-    
+                    diceTab[i]= (Math.floor(Math.random()*6 +1 ))
+                }
+                console.log(diceTab)
+                let occurence1 = diceTab.filter(element => element==1);
+                let occurence2 = diceTab.filter(element => element==2);
+                let occurence3 = diceTab.filter(element => element==3);
+                let occurence4 = diceTab.filter(element => element==4);
+                let occurence5 = diceTab.filter(element => element==5);
+                let occurence6 = diceTab.filter(element => element==6);
+                occurenceTab.push(occurence1.length)
+                occurenceTab.push(occurence2.length)
+                occurenceTab.push(occurence3.length)
+                occurenceTab.push(occurence4.length)
+                occurenceTab.push(occurence5.length)
+                occurenceTab.push(occurence6.length)
+                console.log(occurenceTab)
+            }
+            
+            res.render('../views/game/yams', {diceTab}) 
+    } );
 }
 
 
