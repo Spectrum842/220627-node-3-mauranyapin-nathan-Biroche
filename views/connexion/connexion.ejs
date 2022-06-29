@@ -1,0 +1,25 @@
+<%- include('../partials/header.ejs') -%>
+    <h1>Connectez-vous ! </h1>
+    <%- include('../partials/menu.ejs') -%>
+        <form action="/connexion" method="post">
+
+            <p>
+                <label for="email">Email</label>
+                <% if(filter.email){ %>
+                    <input type="email" id="email" name="email" value=<%= filter.email %> />
+                    <% }else{ %>
+                        <input type="email" id="email" name="email" value="" />
+                        <% } %>
+
+            </p>
+
+            <p>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" value="" />
+            </p>
+
+            <p>
+                <input type="submit" value="Submit" />
+            </p>
+        </form>
+        <%- include('../partials/footer.ejs') -%>

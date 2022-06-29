@@ -1,0 +1,37 @@
+<%- include('../partials/header.ejs') -%>
+    <h1>Inscrivez-vous ! </h1>
+    <%- include('../partials/menu.ejs') -%>
+        <form action="/inscription" method="post">
+
+            <p>
+                <label for="firstname">Firstname</label>
+                <input type="text" id="firstname" name="firstname" value="" />
+            </p>
+
+            <p>
+                <label for="lastname">Lastname</label>
+                <input type="text" id="lastname" name="lastname" value="" />
+            </p>
+
+
+
+            <p>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="" />
+            </p>
+
+            <p>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" value="" />
+            </p>
+
+            <p>
+                <label for="passwordBis">Password Confirmation</label>
+                <input type="password" id="passwordBis" name="passwordBis" value="" />
+            </p>
+
+            <p>
+                <input type="submit" value="Submit" />
+            </p>
+        </form>
+        <%- include('../partials/footer.ejs') -%>

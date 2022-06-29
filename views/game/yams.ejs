@@ -1,0 +1,11 @@
+<%- include('../partials/header.ejs') -%>
+    <h1>Tentez votre chance ! </h1>
+    <%- include('../partials/menu.ejs') -%>
+    <p>Tentez de ganger une patisserie en cliquant sur le bouton ! </p>
+        <p>
+            <a  href="/yams?play=true" id="gameButton" class="gameButton"  >Lancer les dés</button>
+        </p>
+        <% if(diceTab){
+            diceTab.forEach((element) => { %> <p> <%= element %> </p> <% } ) 
+        } %>
+        <%- include('../partials/footer.ejs') -%>

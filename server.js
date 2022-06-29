@@ -1,25 +1,45 @@
 import express from "express";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
-import route from "./routes/routes.js";
+import session from 'express-session';
+
 
 console.clear();
 
 dotenv.config();
-const { APP_HOST: hostname, APP_PORT: port, APP_SECRET: secret, URI_MONGODB: uri } = process.env;
+const { APP_HOST: hostname, APP_PORT: port, APP_DSN: dsn, APP_SECRET } = process.env
+
+mongoose.connect(dsn, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).catch((err) => {
+    console.log(err);
+})
+import route from "./routes/routes.js";
+
 const app = express();
+app.use(express.static("public"));
 
-
-mongoose.connect(
-    uri, { connectTimeoutMS: 3000, socketTimeoutMS: 20000, useNewUrlParser: true, useUnifiedTopology: true }
+app.use(
+    session(
+        {
+            name: 'User',
+            secret: APP_SECRET,
+            resave: true,
+            saveUninitialized: true,
+            cookie: {maxAge: 86400000}
+        }
+    )
 )
 
-app.use(express.static("/public"));
+app.set('view engine', 'ejs');
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
-
-app.use('/', route);
 
 app.listen(port, () => {
     console.log(`Serveur : http://${hostname}:${port}`)
 })
+
+
+app.use('/', route);
