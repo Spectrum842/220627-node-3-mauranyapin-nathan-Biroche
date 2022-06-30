@@ -1,9 +1,9 @@
 <%- include('../partials/header.ejs') -%>
-    <h1>Tentez votre chance ! </h1>
+    <h1>Tentez votre chance <%= user.firstname %> ! </h1>
     <%- include('../partials/menu.ejs') -%>
     <p>Tentez de ganger une patisserie en cliquant sur le bouton ! </p>
         <p>
-            <a  href="/yams?play=true" id="gameButton" class="gameButton"  >Lancer les dés</button>
+            <a  href="/yams?play=true" id="gameButton" class="gameButton"  >Lancer les dés</a>
         </p>
         <% if(diceTab ){ %>
             <h2>Votre score :</h2>
@@ -24,6 +24,10 @@
                 ) 
                 %>
                 </ul>
+                <%
+            }else{ %>
+                %>
+                <h2>Vous avez Perdu !</h2>
                 <%
             }
         } %>
