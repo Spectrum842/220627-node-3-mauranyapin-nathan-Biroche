@@ -1,34 +1,41 @@
 <%- include('../partials/header.ejs') -%>
     <h1>Tentez votre chance <%= user.firstname %> ! </h1>
     <%- include('../partials/menu.ejs') -%>
+    
     <p>Tentez de ganger une patisserie en cliquant sur le bouton ! </p>
-        <p>
-            <a  href="/yams?play=true" id="gameButton" class="gameButton"  >Lancer les dés</a>
-        </p>
-        <% if(diceTab ){ %>
-            <h2>Votre score :</h2>
-            <ul>
-            <%
-            diceTab.forEach((element) => { %> <li> <%= element %> </li> <% }
-             ) 
-             %>
-            </ul>
-            <%
-
-            if(patrieWin != '' ){ %>
-                %>
-                <h2>Vous avez gagné !</h2>
+        <p>Tentatives : <%= gameAttempt %></p>
+        <% if(gameAttempt >1000){ %>
+            <p>Désolé vous avez utilisé toutes vos tentatives ! Revenez demain.</p>
+        <% }else{ %>
+            <p>
+                <a  href="/yams?play=true" id="gameButton" class="gameButton"  >Lancer les dés</a>
+            </p>
+            <% if(diceTab ){ %>
+                <h2>Votre score :</h2>
                 <ul>
                 <%
-                patrieWin.forEach((element) => { %> <li> <%= element.name %> </li> <% }
-                ) 
-                %>
+                diceTab.forEach((element) => { %> <li> <%= element %> </li> <% }
+                 ) 
+                 %>
                 </ul>
                 <%
-            }else{ %>
-                %>
-                <h2>Vous avez Perdu !</h2>
-                <%
-            }
-        } %>
+    
+                if(patrieWin != '' ){ %>
+                    %>
+                    <h2>Vous avez gagné !</h2>
+                    <ul>
+                    <%
+                    patrieWin.forEach((element) => { %> <li><strong><%= element.name %> </strong> - reste : <%= element.number -1 %> </li> <% }
+                    ) 
+                    %>
+                    </ul>
+                    <%
+                }else{ %>
+                    %>
+                    <h2>Vous avez Perdu !</h2>
+                    <%
+                }
+            } 
+        }%>
+        
         <%- include('../partials/footer.ejs') -%>
