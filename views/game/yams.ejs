@@ -7,9 +7,9 @@
         
         <p>Tentez de ganger une patisserie en cliquant sur le bouton.</p>
         <p>Tentatives restantes : <%= 5 - user.gameAttempt %></p>
-        <% if(user.gameAttempt > 1000000){ %>
+        <% if(user.gameAttempt > 5){ %>
             <p>Désolé vous avez utilisé toutes vos tentatives ! Revenez demain.</p>
-        <% }else if(winQuantity >= 1000000){  %>
+        <% }else if(winQuantity >= 50){  %>
             <p>Désolé toutes les patisseries ont été remportés ! Revenez demain.</p>
         </div>
         <%}else{ %>

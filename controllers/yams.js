@@ -25,12 +25,12 @@ export const YamsControllerGet = (req, res) => {
         .then((doc)=>{
                 winQuantity = doc.length;
         })
-        PatrieModel.updateMany({}, { number: 10 }).then(()=>{});
+        //PatrieModel.updateMany({}, { number: 10 }).then(()=>{});
         PatrieModel.find()
         .then((patrieTab) =>{
             if(req.query.play == "true"){
                 for(let i = 0 ; i < 5; i++){
-                    diceTab[i]= (Math.floor(Math.random()*1+1 ))
+                    diceTab[i]= (Math.floor(Math.random()*6+1 ))
                 }
 
                 for(let i= 1; i<7; i++){
@@ -40,21 +40,21 @@ export const YamsControllerGet = (req, res) => {
                 if(occurenceTab.filter(element => element == 2).length>1){
                     console.log('Double paire !')
                     gain = 1;
-                    createWinner(1,user,patrieTab, patrieWinTab, quantityTab)
+                    
                     
                 }else if(occurenceTab.filter(element => element == 4) != ''){
                     console.log('Carré ! ')
                     gain = 2;
-                    createWinner(2,user,patrieTab, patrieWinTab, quantityTab)
 
                 }else if (  occurenceTab.filter(element => element == 5).length !=  '' ){
                     console.log('yams')
                     gain = 3;
-                    createWinner(3,user,patrieTab, patrieWinTab, quantityTab)
+                    
 
                  }else{
-                    console.log("Perdu l'ami")
+                    gain =0;
                 }
+                createWinner(gain,user,patrieTab, patrieWinTab, quantityTab)
                 UserModel.findOneAndUpdate({'_id' : user_id}, {'gameAttempt' : user.gameAttempt+1})
                     .then(() => {});
                 user.gameAttempt  += 1;
