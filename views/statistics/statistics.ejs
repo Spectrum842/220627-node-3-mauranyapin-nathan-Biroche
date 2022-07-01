@@ -1,13 +1,30 @@
 <%- include('../partials/header.ejs') -%>
-    <h1>Statistics </h1>
     <%- include('../partials/menu.ejs') -%>
-        <h3>Votre tableau des scores</h3> 
+    <p class="mt-5 mb-3 fs-1">Votre tableau de gain</p>
 
-    <% doc.forEach((element) => { %>
-        <ul>
-            <li><%= element.name %></li>
-            <li>Quantité : <%= element.quantity %></li>
-            <li>Date : <%= element.date %></li>
-        </ul>
-    <% }) %> 
+    <% if(doc.length >0) { %>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% doc.forEach((element) => { %>
+                <tr>
+                    <td><%= element.name %></td>
+                    <td>Quantité : <%= element.quantity %></td>
+                    <td>Date : <%= element.date %></td>
+                </tr>
+            <% }) %> 
+        </tbody>
+        </table>
+    <% }else{ %>
+        <p>Vous n'avez pas encore gagné !</p>
+        <p>Pour jouer <a href="/yams">Cliquez-ici !</a></p>
+    <% } %>
+    
+    
 <%- include('../partials/footer.ejs') -%>

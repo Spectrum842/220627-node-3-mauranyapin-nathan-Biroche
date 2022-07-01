@@ -20,7 +20,6 @@ export const YamsControllerGet = (req, res) => {
 
     if(user_id){
         UserModel.findById(user_id, (err,user) =>{
-        let gameAttempt = user.gameAttempt;
             
         WinnerModel.find()
         .then((doc)=>{
@@ -58,9 +57,10 @@ export const YamsControllerGet = (req, res) => {
                 }
                 UserModel.findOneAndUpdate({'_id' : user_id}, {'gameAttempt' : user.gameAttempt+1})
                     .then(() => {});
+                user.gameAttempt  += 1;
             }
             
-            res.render('../views/game/yams', {user, gameAttempt, winQuantity, diceTab, patrieWinTab, quantityTab}) 
+            res.render('../views/game/yams', {user, winQuantity, diceTab, patrieWinTab, quantityTab}) 
             } );
         }); 
     }else{

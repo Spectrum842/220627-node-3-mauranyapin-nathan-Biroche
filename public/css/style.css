@@ -15,8 +15,8 @@ body {
 }
 h1 {
   margin: 0 0 1em;
-  color: #345;
   text-align: center;
+  background-color : black;
 }
 /*Navigation*/
 nav {
@@ -87,4 +87,24 @@ a{
 img{
   width: 35%;
   float: left;
+}
+
+.ulScore{
+  list-style: none;
+  display:flex;
+}
+
+.formAuth{
+  display: table-caption;
+}
+
+tr,td,table{
+  color:white;
+  font-size: 1.7rem;
+}
+
+.submitButton{
+  width:50%;
+  height:4rem;
+  font-size:1.5rem;
 }

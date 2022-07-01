@@ -1,44 +1,54 @@
 <%- include('../partials/header.ejs') -%>
-    <h1>Tentez votre chance <%= user.firstname %> ! </h1>
+    
     <%- include('../partials/menu.ejs') -%>
-    
-    <p>Tentez de ganger une patisserie en cliquant sur le bouton ! </p>
-    <p>Tentatives : <%= gameAttempt %></p>
-    <% if(gameAttempt < 5){ %>
-        <p>Désolé vous avez utilisé toutes vos tentatives ! Revenez demain.</p>
-    <% }else if(winQuantity >= 50){  %>
-        <p>Désolé toutes les patisseries ont été remportés ! Revenez demain.</p>
-    
-    <%}else{ %>
-        <p>
-            <a  href="/yams?play=true" id="gameButton" class="gameButton"  >Lancer les dés</a>
-        </p>
-        <% if(diceTab != '' ){ %>
-            <h2>Votre score :</h2>
-            <ul>
-            <%
-            diceTab.forEach((element) => { %> <li> <%= element %> </li> <% }
-                ) 
-                %>
-            </ul>
-            <%
-
-            if(patrieWinTab != '' ){ %>
-                %>
-                <h2>Vous avez gagné !</h2>
-                <ul>
+    <div class="mt-3">
+        <div style="display:grid">
+        <p class="mt-2 mb-2 fs-1">Tentez votre chance <%= user.firstname %> ! </h2>
+        
+        <p>Tentez de ganger une patisserie en cliquant sur le bouton.</p>
+        <p>Tentatives restantes : <%= 5 - user.gameAttempt %></p>
+        <% if(user.gameAttempt > 1000000){ %>
+            <p>Désolé vous avez utilisé toutes vos tentatives ! Revenez demain.</p>
+        <% }else if(winQuantity >= 1000000){  %>
+            <p>Désolé toutes les patisseries ont été remportés ! Revenez demain.</p>
+        </div>
+        <%}else{ %>
+                <p>
+                    Cliquez sur le dé pour jouer ! 
+                </p>
+                <p>
+                    <a href="/yams?play=true" ><img src="images/dé.png" id="imageDe" alt="dé" style="width:10%"></a>
+                </p>
+                    
+            </div>
+            <% if(diceTab != '' ){ %>
+            <div>
+                <h2>Votre score :</h2>
+                <ul class="ulScore mt-5 mb-5">
                 <%
-                patrieWinTab.forEach((element, index) => { %> <li><strong><%= element.name %></strong>, quantité :  <%= quantityTab[index] %>  - reste : <%= element.number %> </li> <% }
-                ) 
-                %>
+                diceTab.forEach((element) => { %> <li> <img src="images/<%= element %>.jpg" alt="dé <%= element %>"> </li> <% }
+                    ) 
+                    %>
                 </ul>
                 <%
-            }else{ %>
-                %>
-                <h2>Vous avez Perdu ! Retentez votre chance ! </h2>
-                <%
-            }
-        } 
-    }%>
-        
+
+                if(patrieWinTab != '' ){ %>
+                    %>
+                    <h2>Vous avez gagné !</h2>
+                    <ul>
+                    <%
+                    patrieWinTab.forEach((element, index) => { %> <li><strong><%= element.name %></strong>, quantité :  <%= quantityTab[index] %>  - reste : <%= element.number %> </li> <% }
+                    ) 
+                    %>
+                    </ul>
+                    <%
+                }else{ %>
+                    %>
+                    <h2>Vous avez Perdu ! Retentez votre chance ! </h2>
+                    <%
+                } %>
+            </div>
+            <%} 
+        }%>
+    </div>
 <%- include('../partials/footer.ejs') -%>

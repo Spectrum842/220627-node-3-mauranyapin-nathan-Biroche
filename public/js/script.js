@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function(){
-    let gameButton = document.getElementById('gameButton');
+    let imageDe = document.getElementById('imageDe');
     let diceTab = [];
-    gameButton.addEventListener('click', function(){
+    imageDe.addEventListener('click', function(){
         console.log('coucou')
-        
+        div.classList.add("gameButton");
         for(let i = 0 ; i < 5; i++){
 
             diceTab[i]= (Math.floor(Math.random()*10 + 1))
