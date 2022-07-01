@@ -4,9 +4,12 @@
     
     <p>Tentez de ganger une patisserie en cliquant sur le bouton ! </p>
     <p>Tentatives : <%= gameAttempt %></p>
-    <% if(gameAttempt >100000){ %>
+    <% if(gameAttempt < 5){ %>
         <p>Désolé vous avez utilisé toutes vos tentatives ! Revenez demain.</p>
-    <% }else{ %>
+    <% }else if(winQuantity >= 50){  %>
+        <p>Désolé toutes les patisseries ont été remportés ! Revenez demain.</p>
+    
+    <%}else{ %>
         <p>
             <a  href="/yams?play=true" id="gameButton" class="gameButton"  >Lancer les dés</a>
         </p>
@@ -25,7 +28,7 @@
                 <h2>Vous avez gagné !</h2>
                 <ul>
                 <%
-                patrieWinTab.forEach((element) => { %> <li><strong><%= element.name %> </strong> - reste : <%= element.number %> </li> <% }
+                patrieWinTab.forEach((element, index) => { %> <li><strong><%= element.name %></strong>, quantité :  <%= quantityTab[index] %>  - reste : <%= element.number %> </li> <% }
                 ) 
                 %>
                 </ul>

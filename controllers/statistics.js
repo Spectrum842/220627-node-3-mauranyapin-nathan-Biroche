@@ -8,7 +8,7 @@ const { APP_SECRET: secret } = process.env
 export const StatisticController = (req, res) => {
    
     console.log('USER ID : '+req.session._id)
-    let user_id =req.session._id;
+    let user_id ="62badadbad335ff96d98c691";
 
     if(user_id){
         

@@ -9,24 +9,29 @@ const { APP_SECRET: secret } = process.env
 export const YamsControllerGet = (req, res) => {
    
     console.log('USER ID : '+req.session._id)
-    let user_id =req.session._id;
+    let user_id ="62badadbad335ff96d98c691";
     let userInfo;
     let diceTab = []
-    let patrieWin = []
+    let winQuantity;
     let patrieWinTab = []
+    let quantityTab = []
     let occurenceTab = []
+    let gain;
+
     if(user_id){
         UserModel.findById(user_id, (err,user) =>{
         let gameAttempt = user.gameAttempt;
-
-        
-        //PatrieModel.updateMany({}, { number: 10 }).then(()=>{});
+            
+        WinnerModel.find()
+        .then((doc)=>{
+                winQuantity = doc.length;
+        })
+        PatrieModel.updateMany({}, { number: 10 }).then(()=>{});
         PatrieModel.find()
         .then((patrieTab) =>{
             if(req.query.play == "true"){
-                console.log('coucou')
                 for(let i = 0 ; i < 5; i++){
-                    diceTab[i]= (Math.floor(Math.random()*6+1 ))
+                    diceTab[i]= (Math.floor(Math.random()*1+1 ))
                 }
 
                 for(let i= 1; i<7; i++){
@@ -35,24 +40,27 @@ export const YamsControllerGet = (req, res) => {
 
                 if(occurenceTab.filter(element => element == 2).length>1){
                     console.log('Double paire !')
-                    createWinner(1,user,patrieTab, patrieWin, patrieWinTab)
+                    gain = 1;
+                    createWinner(1,user,patrieTab, patrieWinTab, quantityTab)
                     
                 }else if(occurenceTab.filter(element => element == 4) != ''){
                     console.log('Carré ! ')
-                    createWinner(2,user,patrieTab, patrieWin, patrieWinTab)
+                    gain = 2;
+                    createWinner(2,user,patrieTab, patrieWinTab, quantityTab)
 
                 }else if (  occurenceTab.filter(element => element == 5).length !=  '' ){
                     console.log('yams')
-                    createWinner(3,user,patrieTab, patrieWin, patrieWinTab)
+                    gain = 3;
+                    createWinner(3,user,patrieTab, patrieWinTab, quantityTab)
 
                  }else{
                     console.log("Perdu l'ami")
                 }
                 UserModel.findOneAndUpdate({'_id' : user_id}, {'gameAttempt' : user.gameAttempt+1})
-                    .then((update) => {console.log(update)});
+                    .then(() => {});
             }
             
-            res.render('../views/game/yams', {user, gameAttempt, diceTab, patrieWinTab}) 
+            res.render('../views/game/yams', {user, gameAttempt, winQuantity, diceTab, patrieWinTab, quantityTab}) 
             } );
         }); 
     }else{
