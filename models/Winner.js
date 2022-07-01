@@ -2,8 +2,10 @@ import mongoose from "mongoose"
 // Schéma pour un chat, les schémas sont nécessaires avec Mongoose
 export const WinnerSchema = new mongoose.Schema({
     id: Number,
+    user_id: String,
+    patrie_id: String,
     name: String,
-    quanity: Number,
+    quantity: Number,
     date : Date,
 })
 

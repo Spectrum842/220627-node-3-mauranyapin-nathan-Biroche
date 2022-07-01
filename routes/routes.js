@@ -4,6 +4,7 @@ import { InscriptionControllerGet, InscriptionControllerPost } from "../controll
 import { ConnexionControllerGet, ConnexionControllerPost } from "../controllers/connexion.js";
 import { YamsControllerGet, YamsControllerPost } from "../controllers/yams.js";
 import { LogoutController} from "../controllers/logout.js";
+import { StatisticController} from "../controllers/statistics.js";
 const router = express.Router();;
 
 
@@ -25,5 +26,8 @@ router.get("/logout", LogoutController)
 // Game
 router.get("/yams", YamsControllerGet);
 router.post("/yams", YamsControllerPost);
+
+// Game
+router.get("/statistics", StatisticController);
 
 export default router;

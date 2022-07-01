@@ -1,0 +1,13 @@
+<%- include('../partials/header.ejs') -%>
+    <h1>Statistics </h1>
+    <%- include('../partials/menu.ejs') -%>
+        <h3>Votre tableau des scores</h3> 
+
+    <% doc.forEach((element) => { %>
+        <ul>
+            <li><%= element.name %></li>
+            <li>Quantité : <%= element.quantity %></li>
+            <li>Date : <%= element.date %></li>
+        </ul>
+    <% }) %> 
+<%- include('../partials/footer.ejs') -%>
